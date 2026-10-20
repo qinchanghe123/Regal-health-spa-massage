@@ -167,6 +167,7 @@
     .service-visual { position: relative; aspect-ratio: 1.33/1; overflow: hidden; background: linear-gradient(135deg,#3d4b41,#9d9171); }
     .service-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.15s ease, transform 7s ease; transform: scale(1.025); filter: saturate(.82); }
     .service-slide.is-active { opacity: 1; transform: scale(1); }
+    .service-visual.is-empty::before { content: "Photo unavailable"; color: #f0e4c6; font-size: 12px; letter-spacing: .04em; position: absolute; left: 18px; bottom: 18px; z-index: 2; }
     .service-visual::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(0deg,rgba(11,30,24,.35),transparent 50%); }
     .service-number { position: absolute; top: 20px; left: 22px; z-index: 2; color: white; font: 400 16px/1 var(--serif); }
     .service-dots { position: absolute; z-index: 2; right: 21px; bottom: 20px; display: flex; gap: 6px; }
@@ -221,6 +222,44 @@
     .gallery-tile figcaption { position: absolute; z-index: 1; bottom: 22px; left: 23px; right: 15px; font: 400 21px/1.3 var(--serif); color: #fff; }
     .gallery-caption { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-top: 23px; color: #737c71; font-size: 11px; }
     .gallery-caption .line-link { color: var(--pine); }
+
+    /* Actual spa photographs: six images shared by the business */
+    .real-spa { position: relative; overflow: hidden; background: #eae7dd; padding: clamp(88px, 9vw, 144px) 0; }
+    .real-spa::before { content: ''; position: absolute; pointer-events: none; top: -240px; right: -210px; width: 540px; height: 540px; border: 1px solid rgba(143, 124, 86, .16); border-radius: 50%; box-shadow: 0 0 0 80px rgba(143,124,86,.028), 0 0 0 160px rgba(143,124,86,.018); }
+    .real-spa-head { display: flex; gap: 40px; justify-content: space-between; align-items: end; margin-bottom: clamp(29px,4vw,50px); }
+    .real-spa-head .display { margin: 19px 0 0; max-width: 775px; }
+    .real-spa-head .display em { color: #7c7059; }
+    .real-spa-head .body-copy { margin: 0 0 5px; max-width: 345px; flex: 0 1 345px; }
+    .real-spa-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.55vw, 22px); }
+    .real-spa-tile { margin: 0; min-width: 0; position: relative; overflow: hidden; background: linear-gradient(145deg,#5f6c5f,#c4b79c); }
+    .real-spa-tile button { width: 100%; display: block; padding: 0; border: 0; background: none; cursor: zoom-in; position: relative; aspect-ratio: 4 / 4.75; color: white; overflow: hidden; }
+    .real-spa-tile button:focus-visible { outline: 3px solid var(--gold-deep); outline-offset: -5px; }
+    .real-spa-tile button::after { content: ''; position: absolute; inset: 48% 0 0; pointer-events: none; background: linear-gradient(0deg,rgba(7,26,19,.58),transparent); }
+    .real-spa-tile img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.94); transition: transform .85s var(--ease), filter .85s var(--ease); }
+    .real-spa-tile button:hover img, .real-spa-tile button:focus-visible img { transform: scale(1.045); filter: saturate(1.05); }
+    .real-spa-tile .photo-fig { position: absolute; z-index: 1; bottom: clamp(12px,2vw,24px); left: clamp(13px,2vw,25px); right: 22px; display: flex; align-items: center; justify-content: space-between; gap: 15px; text-align: left; }
+    .real-spa-tile .photo-name { font: 500 10px/1.5 var(--sans); text-transform: uppercase; letter-spacing: .17em; }
+    .real-spa-tile .photo-fig svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .real-spa-tile.image-unavailable button { cursor: default; }
+    .real-spa-tile.image-unavailable button::after { background: rgba(16,41,33,.35); }
+    .real-spa-tile.image-unavailable .photo-name { font-size: 12px; letter-spacing: .06em; }
+    .real-spa-foot { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-top: 23px; color: #717b70; font-size: 12px; }
+    .real-spa-foot .line-link { color: var(--pine); }
+
+    /* Full-size gallery viewer: no external libraries or tracking */
+    .spa-lightbox { max-width: min(1080px, 96vw); max-height: 94vh; width: max-content; padding: 13px; border: 1px solid rgba(219,193,143,.4); border-radius: 4px; background: #10251f; color: #f4f1e7; box-shadow: 0 24px 100px rgba(0,0,0,.5); overflow: auto; }
+    .spa-lightbox::backdrop { background: rgba(4,15,11,.88); backdrop-filter: blur(5px); }
+    .spa-lightbox[open] { display: flex; flex-direction: column; align-items: stretch; gap: 10px; }
+    .spa-lightbox-visual { position: relative; display: flex; align-items: center; justify-content: center; min-width: min(370px, 85vw); min-height: 240px; background: #223d32; }
+    .spa-lightbox-visual img { display: block; width: auto; height: auto; max-width: min(1020px, 88vw); max-height: 75vh; object-fit: contain; }
+    .spa-lightbox-close { position: absolute; top: 12px; right: 12px; z-index: 4; width: 44px; height: 44px; display: grid; place-items: center; color: #fff; background: rgba(8,27,21,.82); border: 1px solid rgba(255,255,255,.35); cursor: pointer; }
+    .spa-lightbox-close svg { width: 19px; height: 19px; }
+    .spa-lightbox-bottom { display: flex; align-items: center; justify-content: space-between; gap: 13px; padding: 3px 4px 1px; }
+    .spa-lightbox-count { font-size: 10px; text-transform: uppercase; letter-spacing: .19em; color: #d5bd8e; }
+    .spa-lightbox-actions { display: flex; gap: 8px; }
+    .spa-lightbox-actions button { min-width: 45px; min-height: 42px; padding: 9px 13px; display: inline-flex; align-items: center; justify-content: center; background: transparent; color: #e9d6b3; border: 1px solid rgba(232,215,186,.38); cursor: pointer; }
+    .spa-lightbox-actions button:hover { background: rgba(255,255,255,.08); }
+    .spa-lightbox-actions svg { width: 20px; height: 20px; }
 
     /* Review section: NO fabricated customer quotations */
     .reviews { padding: clamp(76px,8.5vw,120px) 0; background: #e6e8df; overflow: hidden; }
@@ -303,6 +342,9 @@
       .experience-step { padding: 34px 21px 30px; }
     }
     @media (max-width: 980px) {
+      .real-spa-head { gap: 25px; }
+      .real-spa-head .body-copy { max-width: 260px; }
+
       .topbar .wrap { justify-content: center; }
       .topbar span:first-child { display: none; }
       .site-header { height: 77px; }
@@ -325,6 +367,9 @@
       .map-shell iframe { min-height: 415px; }
     }
     @media (max-width: 760px) {
+      .real-spa-head { display: block; }
+      .real-spa-head .body-copy { margin-top: 19px; max-width: 570px; }
+
       :root { --edge: 26px; }
       .site-header, .site-header.is-scrolled { height: 72px; }
       .nav-bar { gap: 12px; }
@@ -366,6 +411,17 @@
       .footer-contact { grid-column: 1/3; }
     }
     @media (max-width: 540px) {
+      .real-spa-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+      .real-spa-tile button { aspect-ratio: 3 / 4; }
+      .real-spa-tile .photo-fig { bottom: 10px; left: 11px; right: 11px; }
+      .real-spa-tile .photo-name { font-size: 8px; letter-spacing: .08em; }
+      .real-spa-tile .photo-fig svg { width: 16px; height: 16px; }
+      .real-spa-foot { display: block; }
+      .real-spa-foot .line-link { margin-top: 16px; }
+      .spa-lightbox { max-width: 97vw; max-height: 92vh; padding: 7px; }
+      .spa-lightbox-visual { min-width: min(320px, 90vw); }
+      .spa-lightbox-visual img { max-width: 90vw; max-height: 72vh; }
+
       :root { --edge: 21px; }
       html { scroll-padding-top: 75px; }
       .topbar { min-height: 30px; }
@@ -462,6 +518,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
     <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.09 5.18 2 2 0 0 1 5.08 3h3a2 2 0 0 1 2 1.72c.12.96.35 1.9.68 2.79a2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 4.08 4.08l1.27-1.27a2 2 0 0 1 2.11-.45c.89.33 1.83.56 2.79.68A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v18m-7-7 7 7 7-7"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
@@ -486,7 +543,7 @@
         <span class="logo-type"><strong>Regal</strong><small>Health Spa Massage</small></span>
       </a>
       <nav class="nav-links" aria-label="Main navigation" id="main-nav">
-        <a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#experience">Experience</a><a href="#gallery">Atmosphere</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+        <a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#experience">Experience</a><a href="#our-spa">Our Spa</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
       </nav>
       <a class="btn btn-gold header-call" href="tel:+17257807888"><svg><use href="#i-phone"></use></svg> Call Now</a>
       <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu" aria-controls="main-nav" aria-expanded="false">
@@ -593,7 +650,6 @@
           <article class="service-card reveal" data-carousel data-interval="5500">
             <div class="service-visual">
               <img class="service-slide is-active" src="https://i.pinimg.com/736x/ac/a6/69/aca669d5a5fe654a32f0f6b3c5138275.jpg" alt="Illustrative couples massage experience" loading="lazy" decoding="async">
-              <img class="service-slide" src="https://i.pinimg.com/736x/70/cb/60/70cfa74373d9c0a2e39d478f489e.jpg" alt="Illustrative two-person massage setup" loading="lazy" decoding="async">
               <img class="service-slide" src="https://i.pinimg.com/1200x/dc/19/10/dc1910a382684fb1ef96f192e94b3886.jpg" alt="Illustrative couples massage detail" loading="lazy" decoding="async">
               <span class="service-number">04</span><div class="service-dots"></div>
             </div>
@@ -650,6 +706,70 @@
       </div>
     </section>
 
+    <!-- ACTUAL SHOP PHOTO GALLERY: all six owner-provided interior photos -->
+    <section class="real-spa" id="our-spa" aria-labelledby="real-spa-title">
+      <div class="wrap">
+        <div class="real-spa-head reveal">
+          <div><span class="section-eyebrow small-caps">An Invitation Inside</span><h2 class="display" id="real-spa-title">Step inside <em>Regal.</em></h2></div>
+          <p class="body-copy">Get to know our space before you visit. These photographs offer a closer look at Regal Health Spa Massage in Las Vegas.</p>
+        </div>
+        <div class="real-spa-grid" aria-label="Six photographs of Regal Health Spa Massage">
+          <figure class="real-spa-tile reveal">
+            <button type="button" class="spa-photo-open" aria-label="Enlarge Regal Health Spa Massage photo 1 of 6">
+              <img src="https://img.dingliuads.com/file/1792466077252_lQDPJwh55u4ir4nNBqvNBQCwQ3q4gk44imQKp3BfxSzgAg_1280_1707.jpg" alt="Inside Regal Health Spa Massage — photo 1 of six" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+              <span class="photo-fig"><span class="photo-name">The Spa &nbsp; / &nbsp; 01</span><svg aria-hidden="true"><use href="#i-expand"></use></svg></span>
+            </button>
+          </figure>
+          <figure class="real-spa-tile reveal">
+            <button type="button" class="spa-photo-open" aria-label="Enlarge Regal Health Spa Massage photo 2 of 6">
+              <img src="https://img.dingliuads.com/file/1792466076533_lQDPJwJmqoeRz4nNBqvNBQCwPCMNYyjzOPoKp3BfxSzgAA_1280_1707.jpg" alt="Inside Regal Health Spa Massage — photo 2 of six" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+              <span class="photo-fig"><span class="photo-name">The Spa &nbsp; / &nbsp; 02</span><svg aria-hidden="true"><use href="#i-expand"></use></svg></span>
+            </button>
+          </figure>
+          <figure class="real-spa-tile reveal">
+            <button type="button" class="spa-photo-open" aria-label="Enlarge Regal Health Spa Massage photo 3 of 6">
+              <img src="https://img.dingliuads.com/file/1792466074508_lQDPJxqGIpmYL4nNBQDNA8CwA_J_fZuhl4QKp3BfxU1sAg_960_1280.jpg" alt="Inside Regal Health Spa Massage — photo 3 of six" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+              <span class="photo-fig"><span class="photo-name">The Spa &nbsp; / &nbsp; 03</span><svg aria-hidden="true"><use href="#i-expand"></use></svg></span>
+            </button>
+          </figure>
+          <figure class="real-spa-tile reveal">
+            <button type="button" class="spa-photo-open" aria-label="Enlarge Regal Health Spa Massage photo 4 of 6">
+              <img src="https://img.dingliuads.com/file/1792466080398_lQDPJxugFBl5j4nNBqvNBQCwQgCt6gVoICIKp3BfxU1sAA_1280_1707.jpg" alt="Inside Regal Health Spa Massage — photo 4 of six" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+              <span class="photo-fig"><span class="photo-name">The Spa &nbsp; / &nbsp; 04</span><svg aria-hidden="true"><use href="#i-expand"></use></svg></span>
+            </button>
+          </figure>
+          <figure class="real-spa-tile reveal">
+            <button type="button" class="spa-photo-open" aria-label="Enlarge Regal Health Spa Massage photo 5 of 6">
+              <img src="https://img.dingliuads.com/file/1792466077280_lQDPKGM_3GtVEInNBqvNBQCwiRtBjxA65GUKp3BfxU1sAQ_1280_1707.jpg" alt="Inside Regal Health Spa Massage — photo 5 of six" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+              <span class="photo-fig"><span class="photo-name">The Spa &nbsp; / &nbsp; 05</span><svg aria-hidden="true"><use href="#i-expand"></use></svg></span>
+            </button>
+          </figure>
+          <figure class="real-spa-tile reveal">
+            <button type="button" class="spa-photo-open" aria-label="Enlarge Regal Health Spa Massage photo 6 of 6">
+              <img src="https://img.dingliuads.com/file/1792466076490_lQDPKHqgVg30UInNBqvNBQCwe1xE8oQanWQKp3BfxSzgAQ_1280_1707.jpg" alt="Inside Regal Health Spa Massage — photo 6 of six" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+              <span class="photo-fig"><span class="photo-name">The Spa &nbsp; / &nbsp; 06</span><svg aria-hidden="true"><use href="#i-expand"></use></svg></span>
+            </button>
+          </figure>
+        </div>
+        <div class="real-spa-foot"><span>Photos of the spa, provided by the business. Select any image to enlarge.</span><a class="line-link" href="tel:+17257807888">Call Now <svg aria-hidden="true"><use href="#i-arrow"></use></svg></a></div>
+      </div>
+    </section>
+
+    <!-- Larger-image viewer for the shop photos; no customer data collected -->
+    <dialog class="spa-lightbox" id="spa-lightbox" aria-label="View enlarged photographs of Regal Health Spa Massage">
+      <div class="spa-lightbox-visual">
+        <img id="spa-lightbox-img" alt="Enlarged image of Regal Health Spa Massage">
+        <button type="button" class="spa-lightbox-close" id="spa-lightbox-close" aria-label="Close photo viewer"><svg aria-hidden="true"><use href="#i-close"></use></svg></button>
+      </div>
+      <div class="spa-lightbox-bottom">
+        <span class="spa-lightbox-count" id="spa-lightbox-count" aria-live="polite">Photo 1 of 6</span>
+        <div class="spa-lightbox-actions">
+          <button type="button" id="spa-lightbox-prev" aria-label="Previous photo"><svg aria-hidden="true" style="transform:rotate(180deg)"><use href="#i-arrow"></use></svg></button>
+          <button type="button" id="spa-lightbox-next" aria-label="Next photo"><svg aria-hidden="true"><use href="#i-arrow"></use></svg></button>
+        </div>
+      </div>
+    </dialog>
+
     <!-- 08 / REVIEW CTA — no invented customer quotes or ratings -->
     <section class="reviews" id="reviews" aria-labelledby="reviews-title">
       <div class="wrap reviews-head reveal"><span class="section-eyebrow small-caps">05 / Your Experience Matters</span><h2 class="display" id="reviews-title">Real stories are<br><em>best told by guests.</em></h2></div>
@@ -704,10 +824,10 @@
   <footer class="footer"><div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand"><a href="#home" class="logo" aria-label="Regal Health Spa Massage, return to top"><svg class="logo-mark" viewBox="0 0 48 48"><use href="#i-flower"></use></svg><span class="logo-type"><strong>Regal</strong><small>Health Spa Massage</small></span></a><p>In the heart of Las Vegas, a moment to slow down, reconnect, and embrace the art of unwinding.</p></div>
-      <div><h3>Explore</h3><ul><li><a href="#about">About</a></li><li><a href="#services">Massage Styles</a></li><li><a href="#experience">Experience</a></li><li><a href="#gallery">Atmosphere</a></li><li><a href="#faq">FAQs</a></li></ul></div>
+      <div><h3>Explore</h3><ul><li><a href="#about">About</a></li><li><a href="#services">Massage Styles</a></li><li><a href="#experience">Experience</a></li><li><a href="#our-spa">Our Spa Photos</a></li><li><a href="#gallery">Atmosphere</a></li><li><a href="#faq">FAQs</a></li></ul></div>
       <div class="footer-contact"><h3>Visit & Call</h3><p>4300 W. Spring Mountain Rd.<br>Suite 117, Las Vegas, NV 89102</p><p style="margin-top:11px">9:00 AM – 9:00 PM</p><a href="tel:+17257807888" style="display:inline-block;margin-top:11px">725-780-7888</a></div>
     </div>
-    <div class="footer-bottom"><span>© <span id="year">2026</span> Regal Health Spa Massage. All rights reserved.</span><span>Imagery illustrative · <a href="tel:+17257807888">Call for current services</a></span></div>
+    <div class="footer-bottom"><span>© <span id="year">2026</span> Regal Health Spa Massage. All rights reserved.</span><span>Massage-style images are illustrative · Real spa photos are displayed separately · <a href="tel:+17257807888">Call for current services</a></span></div>
   </div></footer>
   <a href="tel:+17257807888" class="mobile-call"><svg><use href="#i-phone"></use></svg> Call Now · 725-780-7888</a>
 
@@ -760,37 +880,110 @@
       heroDots.forEach((dot, i) => dot.addEventListener('click', () => { clearInterval(heroTimer); showHero(i); startHero(); }));
       startHero();
 
-      // Service cards: independent crossfade carousels, only when 2+ images exist.
+      // Service photo carousels. Failed images are REMOVED (including their dots),
+      // so the autoplay cannot stop on a blank or invalid third-party image.
       document.querySelectorAll('[data-carousel]').forEach((card, cardIdx) => {
-        const slides = [...card.querySelectorAll('.service-slide')];
-        if (slides.length < 2) return;
+        let slides = [...card.querySelectorAll('.service-slide')];
         const dotsWrap = card.querySelector('.service-dots');
+        const imageArea = card.querySelector('.service-visual');
         if (!dotsWrap) return;
         let current = 0;
         let timer;
-        const dots = slides.map((slide, idx) => {
-          const dot = document.createElement('button');
-          dot.type = 'button';
-          dot.setAttribute('aria-label', `Show ${card.querySelector('h3').textContent} photo ${idx + 1}`);
-          dot.setAttribute('aria-current', String(idx === 0));
-          dotsWrap.appendChild(dot);
-          return dot;
-        });
-        const show = index => {
-          current = (index + slides.length) % slides.length;
+
+        function show(index) {
+          if (!slides.length) {
+            imageArea.classList.add('is-empty');
+            return;
+          }
+          current = ((index % slides.length) + slides.length) % slides.length;
           slides.forEach((img, i) => img.classList.toggle('is-active', i === current));
-          dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
-        };
-        const restart = () => {
+          [...dotsWrap.children].forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
+        }
+        function restart() {
           clearInterval(timer);
-          if (!reducedMotion) timer = window.setInterval(() => show(current + 1), Number(card.dataset.interval || 5200) + cardIdx * 120);
-        };
-        dots.forEach((dot, idx) => dot.addEventListener('click', () => { show(idx); restart(); }));
+          if (!reducedMotion && slides.length > 1) {
+            timer = window.setInterval(() => show(current + 1), Number(card.dataset.interval || 5200) + cardIdx * 120);
+          }
+        }
+        function rebuildDots() {
+          dotsWrap.replaceChildren();
+          dotsWrap.hidden = slides.length < 2;
+          slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.setAttribute('aria-label', `Show ${card.querySelector('h3').textContent} photo ${i + 1}`);
+            dot.addEventListener('click', () => { show(i); restart(); });
+            dotsWrap.appendChild(dot);
+          });
+          show(current);
+        }
+        function dropBrokenImage(img) {
+          const index = slides.indexOf(img);
+          if (index < 0) return;
+          slides.splice(index, 1);
+          img.remove();
+          if (index < current) current--;
+          else if (index === current) current = Math.min(current, slides.length - 1);
+          rebuildDots();
+          restart();
+        }
+        slides.forEach(img => {
+          img.addEventListener('error', () => dropBrokenImage(img));
+          if (img.complete && img.naturalWidth === 0) dropBrokenImage(img);
+        });
+        rebuildDots();
         card.addEventListener('mouseenter', () => clearInterval(timer));
         card.addEventListener('mouseleave', restart);
         card.addEventListener('focusin', () => clearInterval(timer));
-        card.addEventListener('focusout', e => { if (!card.contains(e.relatedTarget)) restart(); });
+        card.addEventListener('focusout', event => { if (!card.contains(event.relatedTarget)) restart(); });
         restart();
+      });
+
+      // Accessible viewer for the owner's six photos, with keyboard arrow navigation.
+      const photoButtons = [...document.querySelectorAll('.spa-photo-open')];
+      const viewer = document.getElementById('spa-lightbox');
+      const viewerImage = document.getElementById('spa-lightbox-img');
+      const viewerCount = document.getElementById('spa-lightbox-count');
+      const viewerClose = document.getElementById('spa-lightbox-close');
+      let viewerIndex = 0;
+      let previousFocus = null;
+      function renderViewer() {
+        const source = photoButtons[viewerIndex].querySelector('img');
+        viewerImage.src = source.getAttribute('src');
+        viewerImage.alt = source.alt;
+        viewerCount.textContent = `Photo ${viewerIndex + 1} of ${photoButtons.length}`;
+      }
+      function moveViewer(delta) {
+        viewerIndex = (viewerIndex + delta + photoButtons.length) % photoButtons.length;
+        renderViewer();
+      }
+      photoButtons.forEach((button, idx) => {
+        const img = button.querySelector('img');
+        const markFailed = () => {
+          button.disabled = true;
+          button.closest('.real-spa-tile').classList.add('image-unavailable');
+          button.querySelector('.photo-name').textContent = 'Photo unavailable';
+          img.style.opacity = '0';
+        };
+        img.addEventListener('error', markFailed);
+        if (img.complete && img.naturalWidth === 0) markFailed();
+        button.addEventListener('click', () => {
+          if (button.disabled) return;
+          previousFocus = document.activeElement;
+          viewerIndex = idx;
+          renderViewer();
+          if (typeof viewer.showModal === 'function') viewer.showModal();
+        });
+      });
+      viewerClose.addEventListener('click', () => viewer.close());
+      document.getElementById('spa-lightbox-prev').addEventListener('click', () => moveViewer(-1));
+      document.getElementById('spa-lightbox-next').addEventListener('click', () => moveViewer(1));
+      viewer.addEventListener('click', event => { if (event.target === viewer) viewer.close(); });
+      viewer.addEventListener('close', () => { if (previousFocus && previousFocus.isConnected) previousFocus.focus(); });
+      document.addEventListener('keydown', event => {
+        if (!viewer.open) return;
+        if (event.key === 'ArrowRight') { event.preventDefault(); moveViewer(1); }
+        if (event.key === 'ArrowLeft') { event.preventDefault(); moveViewer(-1); }
       });
 
       // Accessible FAQ accordion (only one panel expanded at a time).
@@ -819,7 +1012,7 @@
       }
 
       // Failed third-party imagery should not leave browser broken-image icons.
-      document.querySelectorAll('img').forEach(img => img.addEventListener('error', () => {
+      document.querySelectorAll('img:not(.service-slide)').forEach(img => img.addEventListener('error', () => {
         img.style.opacity = '0';
         img.setAttribute('aria-hidden', 'true');
       }));
@@ -827,4 +1020,3 @@
   </script>
 </body>
 </html>
-
