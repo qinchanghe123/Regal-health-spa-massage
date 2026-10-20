@@ -304,7 +304,7 @@
     .visit-detail a:hover { color: var(--gold); }
     .visit-actions { display: flex; flex-wrap: wrap; gap: 12px; }
     .map-shell { padding: 9px; border: 1px solid rgba(215,190,143,.42); min-height: 510px; }
-    .map-shell iframe { display: block; width: 100%; min-height: 440px; height: 100%; border: 0; background: #e7e5d8; filter: saturate(.7); }
+    .map-shell iframe { display: block; width: 100%; min-height: 440px; height: 100%; border: 0; background: #e7e5d8; }
     .map-action { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 17px; background:#e7e4da; color:#385448; font-size:10px; letter-spacing:.05em; }
     .map-action span { min-width: 0; }
     .map-action strong { display: block; color: var(--pine); font-size: 12px; letter-spacing: .02em; font-weight: 700; }
@@ -312,39 +312,9 @@
     .map-action a { flex: 0 0 auto; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.11em; border-bottom:1px solid #607666; }
 
 
-    /* Google Maps business card: website-controlled overlay.
-       Native UI inside a cross-origin Google iframe cannot be customized. */
-    .map-viewport { position: relative; min-height: 440px; isolation: isolate; overflow: hidden; background: #e7e5d8; }
-    .map-viewport iframe { width: 100%; height: 440px; min-height: 440px; display: block; }
-    .map-business-card {
-      position: absolute; z-index: 2; top: 16px; left: 16px;
-      width: min(310px, calc(100% - 32px)); padding: 18px 20px 15px;
-      background: rgba(255,255,255,.985); color: #202124;
-      border: 1px solid rgba(18,46,36,.06); border-radius: 5px;
-      box-shadow: 0 5px 23px rgba(22,29,26,.22);
-      font-family: Arial, Helvetica, sans-serif; line-height: 1.5;
-    }
-    .map-business-photo { display:block; width:100%; height:115px; object-fit:cover; object-position:center 46%; border-radius:3px; margin:0 0 11px; background:#e7e5d8; }
-    .map-business-label { display: flex; align-items: center; gap: 7px; margin-bottom: 6px; color: #70757a; font-size: 10px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
-    .map-business-label svg { width: 13px; height: 13px; color: #516d60; }
-    .map-business-name { display: block; margin: 0 0 5px; color: #202124; font: 700 17px/1.25 Arial, Helvetica, sans-serif; letter-spacing: -.02em; }
-    .map-business-rating { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 6px 0 9px; font-size: 12px; }
-    .map-business-score { font: 700 14px/1 Arial, Helvetica, sans-serif; color: #202124; }
-    .map-star-meter { position: relative; display: inline-block; overflow: hidden; white-space: nowrap; width: 88px; height: 18px; font: 17px/18px Arial, Helvetica, sans-serif; letter-spacing: 1px; }
-    .map-star-meter::before { content: '★★★★★'; position: absolute; inset: 0; color: #d8dade; }
-    .map-star-meter::after { content: '★★★★★'; position: absolute; left: 0; top: 0; width: 100%; overflow: hidden; color: #edae38; white-space: nowrap; }
-    .map-business-reviews { font: 400 11px/1.4 Arial, Helvetica, sans-serif; color: #1a73e8; text-decoration: none; }
-    .map-business-reviews:hover, .map-business-open:hover { text-decoration: underline; }
-    .map-business-address { display: block; margin-bottom: 10px; color: #555c59; font: 400 11px/1.55 Arial, Helvetica, sans-serif; }
-    .map-business-open { display: inline-flex; align-items: center; gap: 5px; padding: 4px 0; color: #1a73e8; font: 600 11px/1.35 Arial, Helvetica, sans-serif; }
-    .map-business-open svg { width: 12px; height: 12px; }
-    .map-business-note { display: block; margin-top: 6px; font: 400 9px/1.4 Arial, Helvetica, sans-serif; color: #777b80; }
-
-    /* Separate full-image panel next to the map; never crop the supplied image. */
-    .map-photo-layout { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr); gap:14px; align-items:stretch; }
-    .map-photo-panel { background:#e7e5d8; border:1px solid rgba(215,190,143,.42); padding:9px; display:flex; align-items:center; justify-content:center; min-width:0; }
-    .map-photo-panel img { display:block; width:100%; height:auto; max-height:580px; object-fit:contain; background:#e7e5d8; }
-    @media(max-width:900px) { .map-photo-layout { grid-template-columns:1fr; } .map-photo-panel img { max-height:none; } }
+    /* Native Google Maps iframe: no custom business-card overlay. */
+    .map-viewport { position: relative; min-height: 440px; background: #e7e5d8; }
+    .map-viewport iframe { display: block; width: 100%; height: 440px; min-height: 440px; border: 0; filter: none; }
 
     /* Footer + mobile call */
     .final-call { padding: clamp(65px,8vw,116px) 0; background: #d9c5a0; color: var(--pine); text-align: center; }
@@ -515,10 +485,6 @@
       .map-shell { min-height: 320px; }
       .map-viewport, .map-viewport iframe { min-height: 345px; }
       .map-viewport iframe { height: 345px; }
-      .map-business-card { top: 10px; left: 10px; width: min(290px, calc(100% - 20px)); padding: 13px 15px 12px; }
-      .map-business-name { font-size: 16px; }
-      .map-business-address { font-size: 10px; margin-bottom: 5px; }
-      .map-business-note { font-size: 8px; }
       .footer { padding-bottom: 80px; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px 16px; padding-bottom: 36px; }
       .footer-brand { grid-column: 1/3; }
@@ -856,29 +822,25 @@
             <div class="visit-detail"><svg><use href="#i-phone"></use></svg><div><label>Telephone</label><a href="tel:+17257807888">725-780-7888</a></div></div>
             <div class="visit-detail"><svg><use href="#i-clock"></use></svg><div><label>Business Hours</label><p>9:00 AM – 9:00 PM<br><small style="color:#b9c9bc">Call to confirm days and holiday hours.</small></p></div></div>
           </div>
-          <div class="visit-actions"><a href="tel:+17257807888" class="btn btn-gold"><svg><use href="#i-phone"></use></svg> Call Now <svg><use href="#i-arrow"></use></svg></a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Regal%20massage%20spa%2C%204300%20W.%20Spring%20Mountain%20Rd.%2C%20Suite%20117%2C%20Las%20Vegas%2C%20NV%2089102" class="btn btn-outline-light" target="_blank" rel="noopener noreferrer"><svg><use href="#i-pin"></use></svg> Get Directions</a></div>
+          <div class="visit-actions"><a href="tel:+17257807888" class="btn btn-gold"><svg><use href="#i-phone"></use></svg> Call Now <svg><use href="#i-arrow"></use></svg></a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=36.1276595%2C-115.1979178" class="btn btn-outline-light" target="_blank" rel="noopener noreferrer"><svg><use href="#i-pin"></use></svg> Get Directions</a></div>
         </div>
-        <div class="map-photo-layout reveal">
+        <div class="reveal">
         <div class="map-shell">
           <div class="map-viewport">
-            <iframe title="Regal massage spa — Google Maps business location at 4300 W. Spring Mountain Road, Suite 117, Las Vegas" src="https://www.google.com/maps?q=Regal%20massage%20spa%2C%204300%20W.%20Spring%20Mountain%20Rd.%2C%20Suite%20117%2C%20Las%20Vegas%2C%20NV%2089102&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-            <div class="map-business-card" role="group" aria-label="Regal massage spa business information and public rating">
-              <div class="map-business-label"><svg aria-hidden="true"><use href="#i-pin"></use></svg> Maps business listing</div>
-              <strong class="map-business-name">Regal massage spa</strong>
-              <div class="map-business-rating" aria-label="See current Google rating and customer reviews">
-                <span class="map-star-meter" aria-hidden="true"></span>
-                <a class="map-business-reviews" href="https://www.google.com/maps/place/Regal+massage+spa/@36.1267774,-115.2003372,17z/data=!3m2!4b1!5s0x80c8c6a5778ddb15:0xb7f88032a812ad4c!4m6!3m5!1s0x80c8c725a3cda9d7:0x8788e2d99d7bda06!8m2!3d36.1267731!4d-115.1977623!16s%2Fg%2F11ysdc_c0m" target="_blank" rel="noopener noreferrer">See live rating &amp; reviews ↗</a>
-              </div>
-              <span class="map-business-address">4300 W. Spring Mountain Rd., Suite 117<br>Las Vegas, NV 89102</span>
-              <a class="map-business-open" href="https://www.google.com/maps/place/Regal+massage+spa/@36.1267774,-115.2003372,17z/data=!3m2!4b1!5s0x80c8c6a5778ddb15:0xb7f88032a812ad4c!4m6!3m5!1s0x80c8c725a3cda9d7:0x8788e2d99d7bda06!8m2!3d36.1267731!4d-115.1977623!16s%2Fg%2F11ysdc_c0m" target="_blank" rel="noopener noreferrer">View on Google Maps <svg aria-hidden="true"><use href="#i-arrow"></use></svg></a>
-              <small class="map-business-note">Ratings are displayed on Google Maps</small>
-            </div>
+            <!-- One native Google Maps location pin at the user-specified coordinates.
+                 This iframe is NOT a business-place embed and has no custom overlay. -->
+            <iframe
+              title="Map location pin at 36.1276595, -115.1979178"
+              src="https://maps.google.com/maps?q=36.1276595%2C-115.1979178&amp;z=19&amp;output=embed&amp;hl=en"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
           </div>
-          <div class="map-action"><span><strong>Regal massage spa</strong><small>4300 W. Spring Mountain Rd. · Suite 117</small></span><a href="https://www.google.com/maps/place/Regal+massage+spa/@36.1267774,-115.2003372,17z/data=!3m2!4b1!5s0x80c8c6a5778ddb15:0xb7f88032a812ad4c!4m6!3m5!1s0x80c8c725a3cda9d7:0x8788e2d99d7bda06!8m2!3d36.1267731!4d-115.1977623!16s%2Fg%2F11ysdc_c0m" target="_blank" rel="noopener noreferrer">Open Business Map ↗</a></div>
+          <div class="map-action">
+            <span><strong>Regal massage spa</strong><small>View our Google Maps business listing</small></span>
+            <a href="https://www.google.com/maps/place/Regal+massage+spa/@36.1267774,-115.2003372,17z/data=!4m6!3m5!1s0x80c8c725a3cda9d7:0x8788e2d99d7bda06!8m2!3d36.1267731!4d-115.1977623!16s%2Fg%2F11ysdc_c0m" target="_blank" rel="noopener noreferrer" aria-label="Open Regal massage spa on Google Maps">View on Google Maps ↗</a>
+          </div>
         </div>
-        <figure class="map-photo-panel" aria-label="Regal massage spa additional location photo">
-          <img src="https://img.dingliuads.com/file/1792472764824_lQDPJxesuHZLz1nNCtbNBQCwcHhSC6s2JOUKp4U-2X9dAA_1280_2774.jpg" alt="Regal massage spa location photo, displayed in full" loading="lazy" decoding="async">
-        </figure>
         </div>
       </div>
     </section>
